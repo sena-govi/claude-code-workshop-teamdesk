@@ -10,7 +10,7 @@ export default function Header() {
             className="inline-flex items-center gap-2.5 font-heading text-foreground text-xl no-underline"
             to="/"
           >
-            <span className="h-2.5 w-2.5 rounded-full bg-primary" />
+            <span className="h-2.5 w-2.5 rounded-sm bg-primary" />
             Teamdesk
           </Link>
         </h2>
