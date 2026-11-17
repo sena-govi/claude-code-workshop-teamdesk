@@ -1,26 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "#/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "#/components/ui/tooltip";
 
 export const Route = createFileRoute("/")({ component: App });
 
 const pages = [
   {
     description: "See who is on the team and read the latest announcements.",
+    tint: "team",
     title: "Team",
     to: "/team",
   },
   {
     description: "The meeting rooms you can book and how many each seats.",
+    tint: "rooms",
     title: "Rooms",
     to: "/rooms",
   },
   {
     description: "Book a room for a meeting and keep track of your bookings.",
+    tint: "bookings",
     title: "Bookings",
     to: "/bookings",
   },
   {
     description: "Shared jobs, who has them and when they are due.",
+    tint: "tasks",
     title: "Tasks",
     to: "/tasks",
   },
@@ -43,17 +52,27 @@ function App() {
         </Button>
       </section>
 
-      <section className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-        {pages.map(({ description, title, to }, index) => (
+      <section className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {pages.map(({ description, tint, title, to }, index) => (
           <article
-            className="rise-in border-border border-t pt-5"
+            className={`rise-in tint-panel tint-${tint} rounded-xl border p-5`}
             key={title}
             style={{ animationDelay: `${index * 90 + 80}ms` }}
           >
             <h2 className="mb-2 font-heading text-2xl text-foreground leading-tight">
-              <Link className="no-underline" to={to}>
-                {title}
-              </Link>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link className="no-underline" to={to}>
+                    {title}
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent
+                  className="border"
+                  style={{ borderColor: `var(--tint-${tint}-border)` }}
+                >
+                  Open {title}
+                </TooltipContent>
+              </Tooltip>
             </h2>
             <p className="m-0 text-muted-foreground text-sm">{description}</p>
           </article>

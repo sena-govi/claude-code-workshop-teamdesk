@@ -43,7 +43,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="flex min-h-dvh flex-col font-sans antialiased [overflow-wrap:anywhere] selection:bg-primary/30">
-        <TooltipProvider>
+        <TooltipProvider delayDuration={300}>
           <Header />
           {/* flex-1 pushes the footer to the bottom on short pages. */}
           <div className="flex-1 pb-20">{children}</div>

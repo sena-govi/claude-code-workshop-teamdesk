@@ -1,9 +1,28 @@
 import { Link } from "@tanstack/react-router";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "#/components/ui/tooltip";
 import ThemeToggle from "./theme-toggle";
+
+const navItems = [
+  { label: "Home", tip: "Back to the start", to: "/" },
+  { label: "About", tip: "What Teamdesk is", to: "/about" },
+  { label: "Notes", tip: "Shared team notes", to: "/notes" },
+  { label: "Team", tip: "See who is on the team", to: "/team" },
+  { label: "Rooms", tip: "Meeting rooms and their seats", to: "/rooms" },
+  {
+    label: "Bookings",
+    tip: "Book a room and see your bookings",
+    to: "/bookings",
+  },
+  { label: "Tasks", tip: "Shared jobs and due dates", to: "/tasks" },
+] as const;
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-border border-b bg-background/90 px-4 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-border border-b bg-background/90 px-4 backdrop-blur-lg dark:bg-transparent">
       <nav className="page-wrap flex flex-wrap items-center gap-x-3 gap-y-2 py-3 sm:py-4">
         <h2 className="m-0 flex-shrink-0 text-base">
           <Link
@@ -16,55 +35,20 @@ export default function Header() {
         </h2>
 
         <div className="order-3 flex w-full flex-wrap items-center gap-x-4 gap-y-1 pb-1 font-semibold text-sm sm:order-none sm:w-auto sm:pb-0">
-          <Link
-            activeProps={{ className: "nav-link is-active" }}
-            className="nav-link"
-            to="/"
-          >
-            Home
-          </Link>
-          <Link
-            activeProps={{ className: "nav-link is-active" }}
-            className="nav-link"
-            to="/about"
-          >
-            About
-          </Link>
-          <Link
-            activeProps={{ className: "nav-link is-active" }}
-            className="nav-link"
-            to="/notes"
-          >
-            Notes
-          </Link>
-          <Link
-            activeProps={{ className: "nav-link is-active" }}
-            className="nav-link"
-            to="/team"
-          >
-            Team
-          </Link>
-          <Link
-            activeProps={{ className: "nav-link is-active" }}
-            className="nav-link"
-            to="/rooms"
-          >
-            Rooms
-          </Link>
-          <Link
-            activeProps={{ className: "nav-link is-active" }}
-            className="nav-link"
-            to="/bookings"
-          >
-            Bookings
-          </Link>
-          <Link
-            activeProps={{ className: "nav-link is-active" }}
-            className="nav-link"
-            to="/tasks"
-          >
-            Tasks
-          </Link>
+          {navItems.map(({ label, to, tip }) => (
+            <Tooltip key={to}>
+              <TooltipTrigger asChild>
+                <Link
+                  activeProps={{ className: "nav-link is-active" }}
+                  className="nav-link"
+                  to={to}
+                >
+                  {label}
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent sideOffset={8}>{tip}</TooltipContent>
+            </Tooltip>
+          ))}
           <a
             className="nav-link"
             href="https://tanstack.com/start/latest/docs/framework/react/overview"

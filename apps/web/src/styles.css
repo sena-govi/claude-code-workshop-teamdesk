@@ -99,6 +99,20 @@
 
   /* Accent text: 5.03:1 on background, 5.36:1 on white cards. */
   --brand-label: #0e7490;
+
+  /* Section tints fall back to the plain card look in light. */
+  --tint-team: var(--card);
+  --tint-team-border: var(--border);
+  --tint-rooms: var(--card);
+  --tint-rooms-border: var(--border);
+  --tint-bookings: var(--card);
+  --tint-bookings-border: var(--border);
+  --tint-tasks: var(--card);
+  --tint-tasks-border: var(--border);
+  --tint-notes: var(--card);
+  --tint-notes-border: var(--border);
+  --tint-about: var(--card);
+  --tint-about-border: var(--border);
 }
 
 /* Dark: near-black cool surfaces with bright cyan. */
@@ -136,6 +150,24 @@
   --sidebar-ring: var(--brand-accent);
 
   --brand-label: var(--brand-accent);
+
+  /* Background gradient (dark only). */
+  --bg-gradient-from: #0a0d12;
+  --bg-gradient-to: #0d1b2e;
+
+  /* Section tints: ~12% fill, ~30% border. */
+  --tint-team: rgb(99 102 241 / 0.12);
+  --tint-team-border: rgb(99 102 241 / 0.3);
+  --tint-rooms: rgb(20 184 166 / 0.12);
+  --tint-rooms-border: rgb(20 184 166 / 0.3);
+  --tint-bookings: rgb(139 92 246 / 0.12);
+  --tint-bookings-border: rgb(139 92 246 / 0.3);
+  --tint-tasks: rgb(245 158 11 / 0.12);
+  --tint-tasks-border: rgb(245 158 11 / 0.3);
+  --tint-notes: rgb(100 116 139 / 0.12);
+  --tint-notes-border: rgb(100 116 139 / 0.3);
+  --tint-about: rgb(14 165 233 / 0.12);
+  --tint-about-border: rgb(14 165 233 / 0.3);
 }
 
 @layer base {
@@ -160,6 +192,43 @@
 
 body {
   min-height: 100dvh;
+}
+
+/* Dark only: ink-to-navy gradient. --background stays as the fallback. */
+.dark body {
+  background: linear-gradient(
+      to bottom,
+      var(--bg-gradient-from),
+      var(--bg-gradient-to)
+    )
+    fixed;
+  background-color: var(--background);
+}
+
+/* Home section panels: one tint per section. */
+.tint-panel {
+  background-color: var(--tint);
+  border-color: var(--tint-border);
+}
+
+.tint-team {
+  --tint: var(--tint-team);
+  --tint-border: var(--tint-team-border);
+}
+
+.tint-rooms {
+  --tint: var(--tint-rooms);
+  --tint-border: var(--tint-rooms-border);
+}
+
+.tint-bookings {
+  --tint: var(--tint-bookings);
+  --tint-border: var(--tint-bookings-border);
+}
+
+.tint-tasks {
+  --tint: var(--tint-tasks);
+  --tint-border: var(--tint-tasks-border);
 }
 
 body {
