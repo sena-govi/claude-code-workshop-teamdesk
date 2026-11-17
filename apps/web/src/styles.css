@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Newsreader:opsz,wght@6..72,300..600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@300..700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -6,8 +6,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Newsreader", ui-serif, Georgia, serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Geist Mono", ui-monospace, monospace;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -50,95 +51,91 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Brand core from docs/image.png - constant across themes. One accent only:
-   terracotta. Everything else is warm paper and ink. */
+/* Brand core - constant across themes. One accent only: electric cyan.
+   --brand-paper is the light base, --brand-ink is the dark base. */
 :root {
-  --brand-terracotta: oklch(0.6724 0.1308 38.76); /* #d97757 */
-  --brand-paper: oklch(0.9818 0.0054 95.1); /* #faf9f5 */
-  --brand-ink: oklch(0.209 0 0); /* #181818 */
+  --brand-accent: #22d3ee; /* bright cyan, for fills on dark */
+  --brand-accent-strong: #0e7490; /* darker step for text/fills on light */
+  --brand-paper: #f6f8fa;
+  --brand-ink: #0a0d12;
 
-  --radius: 0.75rem;
+  --radius: 0.25rem;
 }
 
-/* Light is the reference surface: ink on warm paper, hairline dividers, and
-   terracotta for fills and labels. */
+/* Light: cool off-white, white cards, dark text, same cyan identity. */
 :root,
 .light {
   --background: var(--brand-paper);
-  --foreground: var(--brand-ink);
-  --card: oklch(1 0 0);
-  --card-foreground: var(--brand-ink);
-  --popover: oklch(1 0 0);
-  --popover-foreground: var(--brand-ink);
-  --primary: var(--brand-terracotta);
-  --primary-foreground: var(
-    --brand-ink
-  ); /* white on terracotta is only 3.1:1 */
-  --secondary: oklch(0.9457 0.0096 93.57); /* #efede6 */
-  --secondary-foreground: var(--brand-ink);
-  --muted: oklch(0.9457 0.0096 93.57);
-  --muted-foreground: oklch(
-    0.5181 0.01 84.59
-  ); /* #6b6862, image's #8a8681 fails AA */
-  --accent: oklch(0.9457 0.0096 93.57);
-  --accent-foreground: var(--brand-ink);
-  --destructive: oklch(0.5289 0.1661 28.5); /* #b8382e */
-  --border: oklch(0.9088 0.0123 96.43); /* #e3e1d8 divider */
-  --input: oklch(0.9088 0.0123 96.43);
-  --ring: var(--brand-terracotta);
-  --chart-1: var(--brand-terracotta);
-  --chart-2: var(--brand-ink);
-  --chart-3: oklch(0.3791 0 0); /* #424242 */
-  --chart-4: oklch(0.622 0.0088 73.7); /* #8a8681 */
-  --chart-5: oklch(0.9088 0.0123 96.43);
+  --foreground: #0b1220;
+  --card: #ffffff;
+  --card-foreground: #0b1220;
+  --popover: #ffffff;
+  --popover-foreground: #0b1220;
+  --primary: var(--brand-accent-strong);
+  --primary-foreground: #ffffff; /* 5.36:1 on #0e7490 */
+  --secondary: #e8edf2;
+  --secondary-foreground: #0b1220;
+  --muted: #e8edf2;
+  --muted-foreground: #586577; /* 5.57:1 on background, 5.03:1 on muted */
+  --accent: #e8edf2;
+  --accent-foreground: #0b1220;
+  --destructive: #b42318; /* 6.18:1 on background */
+  --border: #d5dde6;
+  --input: #d5dde6;
+  --ring: var(--brand-accent-strong);
+  --chart-1: var(--brand-accent-strong);
+  --chart-2: #334155;
+  --chart-3: #64748b;
+  --chart-4: #94a3b8;
+  --chart-5: #cbd5e1;
   --sidebar: var(--brand-paper);
-  --sidebar-foreground: var(--brand-ink);
-  --sidebar-primary: var(--brand-terracotta);
-  --sidebar-primary-foreground: var(--brand-ink);
-  --sidebar-accent: oklch(0.9457 0.0096 93.57);
-  --sidebar-accent-foreground: var(--brand-ink);
-  --sidebar-border: oklch(0.9088 0.0123 96.43);
-  --sidebar-ring: var(--brand-terracotta);
+  --sidebar-foreground: #0b1220;
+  --sidebar-primary: var(--brand-accent-strong);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e8edf2;
+  --sidebar-accent-foreground: #0b1220;
+  --sidebar-border: #d5dde6;
+  --sidebar-ring: var(--brand-accent-strong);
 
-  /* Terracotta text needs a darker step to pass AA on paper. */
-  --brand-label: oklch(0.5585 0.1322 38.91); /* #b35434 */
+  /* Accent text: 5.03:1 on background, 5.36:1 on white cards. */
+  --brand-label: #0e7490;
 }
 
-/* Dark variant: the same hues with paper and ink swapped. */
+/* Dark: near-black cool surfaces with bright cyan. */
 .dark {
   --background: var(--brand-ink);
-  --foreground: var(--brand-paper);
-  --card: oklch(0.2485 0.0024 67.72); /* #222120 */
-  --card-foreground: var(--brand-paper);
-  --popover: oklch(0.2485 0.0024 67.72);
-  --popover-foreground: var(--brand-paper);
-  --primary: var(--brand-terracotta);
-  --primary-foreground: var(--brand-ink);
-  --secondary: oklch(0.2894 0.0039 84.58); /* #2c2b29 */
-  --secondary-foreground: var(--brand-paper);
-  --muted: oklch(0.2894 0.0039 84.58);
-  --muted-foreground: oklch(0.6973 0.0111 81.79); /* #a19d96 */
-  --accent: oklch(0.2894 0.0039 84.58);
-  --accent-foreground: var(--brand-paper);
-  --destructive: oklch(0.6683 0.1574 28.93); /* #e5695a */
-  --border: oklch(0.3417 0.0059 78.25); /* #3a3835 */
-  --input: oklch(0.3417 0.0059 78.25);
-  --ring: var(--brand-terracotta);
-  --chart-1: var(--brand-terracotta);
-  --chart-2: var(--brand-paper);
-  --chart-3: oklch(0.6973 0.0111 81.79);
-  --chart-4: oklch(0.5181 0.01 84.59);
-  --chart-5: oklch(0.3417 0.0059 78.25);
+  --foreground: #e6edf3;
+  --card: #10151c;
+  --card-foreground: #e6edf3;
+  --popover: #10151c;
+  --popover-foreground: #e6edf3;
+  --primary: var(--brand-accent);
+  --primary-foreground: #06222b; /* 9.14:1 on cyan */
+  --secondary: #18202b;
+  --secondary-foreground: #e6edf3;
+  --muted: #18202b;
+  --muted-foreground: #8b98a9; /* 6.64:1 on bg, 6.25:1 on card */
+  --accent: #18202b;
+  --accent-foreground: #e6edf3;
+  --destructive: #f87171;
+  --border: #1e2733;
+  --input: #1e2733;
+  --ring: var(--brand-accent);
+  --chart-1: var(--brand-accent);
+  --chart-2: #e6edf3;
+  --chart-3: #8b98a9;
+  --chart-4: #556274;
+  --chart-5: #2a3544;
   --sidebar: var(--brand-ink);
-  --sidebar-foreground: var(--brand-paper);
-  --sidebar-primary: var(--brand-terracotta);
-  --sidebar-primary-foreground: var(--brand-ink);
-  --sidebar-accent: oklch(0.2894 0.0039 84.58);
-  --sidebar-accent-foreground: var(--brand-paper);
-  --sidebar-border: oklch(0.3417 0.0059 78.25);
-  --sidebar-ring: var(--brand-terracotta);
+  --sidebar-foreground: #e6edf3;
+  --sidebar-primary: var(--brand-accent);
+  --sidebar-primary-foreground: #06222b;
+  --sidebar-accent: #18202b;
+  --sidebar-accent-foreground: #e6edf3;
+  --sidebar-border: #1e2733;
+  --sidebar-ring: var(--brand-accent);
 
-  --brand-label: oklch(0.7187 0.1122 39.57); /* #e08b6e */
+  --brand-label: var(--brand-accent);
 }
 
 @layer base {
@@ -177,26 +174,39 @@ body {
   margin-inline: auto;
 }
 
-/* Serif display heading, sentence case, slightly tightened like the image. */
+/* Monospace display heading, tightened. */
 .display-title {
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
-/* Soft panel: rounded, hairline border, no shadow. */
+/* Panel: sharp corners, hairline border, no shadow, faint cyan glow on
+   hover/focus. */
 .island-shell {
   position: relative;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-2xl);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
 }
 
-/* Eyebrow label: small terracotta text above a heading. */
+.island-shell:hover,
+.island-shell:focus-within {
+  border-color: color-mix(in oklab, var(--ring) 45%, var(--border));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--ring) 18%, transparent);
+}
+
+/* Eyebrow label: small mono uppercase cyan text above a heading. */
 .island-kicker {
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--brand-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .nav-link {
@@ -217,7 +227,7 @@ body {
   width: 100%;
   height: 1px;
   content: "";
-  background: var(--brand-terracotta);
+  background: var(--brand-label);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 170ms ease;
